@@ -6,6 +6,10 @@
 /*   By: fle-roy <fle-roy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 10:47:29 by fle-roy           #+#    #+#             */
-/*   Updated: 2018/04/04 10:47:31 by fle-roy          ###   ########.fr       */
+/*   Updated: 2018/04/04 13:36:16 by fle-roy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+const conf = require("./config.js");
+
+console.log(conf.read_config());
