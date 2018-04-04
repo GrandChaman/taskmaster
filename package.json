@@ -1,0 +1,19 @@
+{
+  "name": "taskmaster",
+  "version": "1.0.0",
+  "description": "A tiny taskmaster",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GrandChaman/taskmaster.git"
+  },
+  "author": "GrandChaman",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/GrandChaman/taskmaster/issues"
+  },
+  "homepage": "https://github.com/GrandChaman/taskmaster#readme"
+}
