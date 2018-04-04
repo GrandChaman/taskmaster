@@ -6,7 +6,7 @@
 /*   By: fle-roy <fle-roy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 16:27:22 by fle-roy           #+#    #+#             */
-/*   Updated: 2018/04/04 17:49:40 by fle-roy          ###   ########.fr       */
+/*   Updated: 2018/04/04 17:56:13 by fle-roy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,6 @@ var server = net.createServer((socket) => {
 	        case "config":
 	        case "help":
 	            socket.write("GOTCHA");
-	            break;
-	        case "exit":
-	            rl.close();
 	            break;
 	        default:
 	            socket.write("Command not found. Try help next time ;)");

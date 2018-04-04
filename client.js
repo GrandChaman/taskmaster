@@ -6,7 +6,7 @@
 /*   By: fle-roy <fle-roy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 17:42:52 by fle-roy           #+#    #+#             */
-/*   Updated: 2018/04/04 17:50:25 by fle-roy          ###   ########.fr       */
+/*   Updated: 2018/04/04 17:56:59 by fle-roy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,10 @@ rl.on('SIGCONT', () => {
 });
 
 rl.on('line', (line) => {
-	socket.write(line);
+	if (line == "")
+		rl.prompt();
+	else if (line.trim() == "exit")
+		rl.close();
+	else
+		socket.write(line);
 });
