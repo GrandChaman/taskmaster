@@ -2,21 +2,21 @@
 	"prgm_list": [
 		{
 			"name": "Toto",
-			"command": "/bin/toto",
+			"command": "cat /dev/random",
 			"proc_nbr": 8,
-			"start_at_launch": false,
+			"start_at_launch": true,
 			"should_restart": "always",
 			"restart_retry_nbr": 5,
 			"normal_exit_code": 0,
 			"normal_run_time": 120,
-			"stop_signal": 2,
+			"stop_signal": "SIGPIPE",
 			"stop_time": 20,
-			"stdout_logfile": "",
-			"stderr_logfile": "",
+			"stdout_logfile": null,
+			"stderr_logfile": "toto_err.txt",
 			"begin_with_clean_env": true,
 			"env": [
-				"TOTO=SALUT",
-				"COUCOU=BONJOUR"
+				{"TOTO": "Salut"},
+				{"Bonjour": "Bonsoir"}
 			],
 			"cwd": "/tmp",
 			"umask": "00222"
