@@ -9,15 +9,15 @@
 			"restart_retry_nbr": 5,
 			"normal_exit_code": 0,
 			"normal_run_time": 120,
-			"stop_signal": "SIGPIPE",
-			"stop_time": 20,
+			"stop_signal": "SIGCHLD",
+			"stop_time": 5,
 			"stdout_logfile": null,
 			"stderr_logfile": "toto_err.txt",
 			"begin_with_clean_env": true,
-			"env": [
-				{"TOTO": "Salut"},
-				{"Bonjour": "Bonsoir"}
-			],
+			"env": {
+				"TOTO": "Salut",
+				"Coucou": "Bonjour"
+			},
 			"cwd": "/tmp",
 			"umask": "00222"
 		}
