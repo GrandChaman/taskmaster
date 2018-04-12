@@ -6,7 +6,7 @@
 /*   By: fle-roy <fle-roy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 16:27:22 by fle-roy           #+#    #+#             */
-/*   Updated: 2018/04/11 16:40:26 by bluff            ###   ########.fr       */
+/*   Updated: 2018/04/12 18:36:59 by bluff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ function find_in_child_vector(value) {
 function tm_log(message) {
     let time = process.uptime();
 
-    console.log('\r[' + time.toFixed(Math.floor((time / 10)) + 3) + '] [INFO] ' + message);
+    console.log('\r[' + time.toFixed(3) + '] [INFO] ' + message);
 }
 
 function tm_error(message) {
     let time = process.uptime();
 
-    console.log('\r[' + time.toFixed((time / 10) + 3) + '] [INFO] ' + message);
+    console.log('\r[' + time.toFixed(3) + '] [INFO] ' + message);
 }
 
 function load_child() {
@@ -64,19 +64,16 @@ function kill_child(child) {
 
     i = 0;
     child.proc.forEach((el) => {
+		let ii = i;
         tm_log("Stopping " + child.name + "[" + i + "]");
         if (!el.ended) {
             el.removeAllListeners("exit");
             el.on("exit", (code, signal) => {
-				let ii = i;
-
                 el.ended = true;
 				tm_log("Stopped " + child.name + "[" + ii + "]");
             });
             el.kill(child.stop_signal);
 			setTimeout(() => {
-				let ii = i;
-
 				tm_error(child.stop_time + " seconds since first signal, force stopping "
 				+ child.name + "[" + ii + "]");
 				el.kill("SIGABRT");
