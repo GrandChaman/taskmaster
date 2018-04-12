@@ -6,7 +6,7 @@
 /*   By: fle-roy <fle-roy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 16:27:22 by fle-roy           #+#    #+#             */
-/*   Updated: 2018/04/12 18:36:59 by bluff            ###   ########.fr       */
+/*   Updated: 2018/04/12 18:57:23 by bluff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,24 @@ function load_child() {
 }
 
 function child_guard(child, id, code, signal) {
+	let case_id = "[" + Math.random().toString(36).substring(7) + "] "
+		+ child.name + "[" + id + "] ";
+	let stop_time = Math.floor(Number(process.uptime() - child.start_time));
+
     if (!signal)
-        tm_log(child.name + "[" + id + "] exited (" + code + ")");
+        tm_log(case_id + "exit'd (code : " + code + ")");
     else
-        tm_log(child.name + "[" + id + "] caught signal " + signal);
+        tm_log(case_id + "caught signal " + signal);
+	if (code != child.normal_exit_code)
+		tm_log(case_id + "exit'd with unexpected code : " +
+			(code ? code : signal));
+	if (stop_time < child.normal_run_time)
+		tm_log(case_id + "exit'd (in " + Math.floor(stop_time) + "s) before normal run time");
+	if (child.should_restart == "always")
+		console.log("Should restart that child");
+	else if (child.should_restart == "unexpected" &&
+		(stop_time < child.normal_run_time || code != child.normal_exit_code))
+		console.log("Should restard that child 2");
 }
 
 function kill_child(child) {
@@ -74,6 +88,8 @@ function kill_child(child) {
             });
             el.kill(child.stop_signal);
 			setTimeout(() => {
+				if (el.ended)
+					return ;
 				tm_error(child.stop_time + " seconds since first signal, force stopping "
 				+ child.name + "[" + ii + "]");
 				el.kill("SIGABRT");
@@ -130,9 +146,6 @@ function launch_child_startup() {
 }
 load_child();
 launch_child_startup();
-child_vector.forEach((el) => {
-	kill_child(el);
-});
 var server = net.createServer((socket) => {
     socket.on("connect", () => {
         tm_log("Socket connected to server")
@@ -178,6 +191,9 @@ function clean_up(closing) {
         server.close(() => {
             tm_log("Closed server");
         });
+		child_vector.forEach((el) => {
+			kill_child(el);
+		});
         //process.removeAllListeners();
     }
 }

@@ -2,14 +2,14 @@
 	"prgm_list": [
 		{
 			"name": "Toto",
-			"command": "cat /dev/random",
+			"command": "/bin/sleep 5",
 			"proc_nbr": 8,
 			"start_at_launch": true,
 			"should_restart": "always",
 			"restart_retry_nbr": 5,
 			"normal_exit_code": 0,
-			"normal_run_time": 120,
-			"stop_signal": "SIGCHLD",
+			"normal_run_time": 1,
+			"stop_signal": "SIGPIPE",
 			"stop_time": 5,
 			"stdout_logfile": null,
 			"stderr_logfile": "toto_err.txt",
